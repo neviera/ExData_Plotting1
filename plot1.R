@@ -10,13 +10,13 @@ firstRows <- read.table(file, header = TRUE, nrows = 5, sep=";", dec=".")
 colCl <- sapply(firstRows, class)
 
 #read only selected rows
-selectedData<-read.csv.sql(file, sql="select * from file where Date='1/2/2007' or Date='2/2/2007'", header=TRUE, sep=";", colClasses=colCl)
+sData<-read.csv.sql(file, sql="select * from file where Date='1/2/2007' or Date='2/2/2007'", header=TRUE, sep=";", colClasses=colCl)
 closeAllConnections()
 
 #open PGN device
 png(filename = "plot1.png", width=480, height=480, units = "px")
 
 #plot1
-hist(selectedData$Global_active_power, main="Global Active Power", xlab = "Global Active Power (kilowatts)", col = "red")
+hist(sData$Global_active_power, main="Global Active Power", xlab = "Global Active Power (kilowatts)", col = "red")
 dev.off(which = dev.cur())
 }

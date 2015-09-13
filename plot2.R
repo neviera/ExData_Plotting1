@@ -14,18 +14,18 @@ if((file.exists(file))&(dir.exists(folder))){
   colCl <- sapply(firstRows, class)
   
   #read only selected rows
-  selectedData<-read.csv.sql(file, sql="select * from file where Date='1/2/2007' or Date='2/2/2007'", header=TRUE, sep=";", colClasses=colCl)
+  sData<-read.csv.sql(file, sql="select * from file where Date='1/2/2007' or Date='2/2/2007'", header=TRUE, sep=";", colClasses=colCl)
   closeAllConnections()
   
   #convert Date to date format
-  tempTime<-paste(selectedData$Date,selectedData$Time)
-  selectedData$DateTime<-strptime(tempTime,format="%d/%m/%Y %H:%M:%S", tz="")
+  tempTime<-paste(sData$Date,sData$Time)
+  sData$DateTime<-strptime(tempTime,format="%d/%m/%Y %H:%M:%S", tz="")
   
   #open PGN device
   png(filename = "plot2.png", width=480, height=480, units = "px")
   
   #plot2
-  plot(selectedData$DateTime,selectedData$Global_active_power, type = "l", xlab = "", ylab="Global Active Power (kilowatts)")
+  plot(sData$DateTime,sData$Global_active_power, type = "l", xlab = "", ylab="Global Active Power (kilowatts)")
   
   dev.off(which = dev.cur())
 }
