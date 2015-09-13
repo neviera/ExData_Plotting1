@@ -4,10 +4,12 @@ folder<-"E:/Julius/Studies/Data Science Specialization/Exploratory Data Analysis
 
 if((file.exists(file))&(dir.exists(folder))){
 setwd(folder)
-  
+
 #get column classes
 firstRows <- read.table(file, header = TRUE, nrows = 5, sep=";", dec=".")
 colCl <- sapply(firstRows, class)
+
+library(sqldf)
 
 #read only selected rows
 sData<-read.csv.sql(file, sql="select * from file where Date='1/2/2007' or Date='2/2/2007'", header=TRUE, sep=";", colClasses=colCl)

@@ -12,6 +12,8 @@ if((file.exists(file))&(dir.exists(folder))){
   firstRows <- read.table(file, header = TRUE, nrows = 5, sep=";", dec=".")
   colCl <- sapply(firstRows, class)
   
+  library(sqldf)
+  
   #read only selected rows
   sData<-read.csv.sql(file, sql="select * from file where Date='1/2/2007' or Date='2/2/2007'", header=TRUE, sep=";", colClasses=colCl)
   closeAllConnections()
